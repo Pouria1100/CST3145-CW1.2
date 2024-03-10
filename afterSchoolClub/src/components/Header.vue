@@ -7,14 +7,10 @@
             <h1 class="pageTitle">{{ siteName }}</h1>
         </div>
         
-
-       
-
-        <div class="basketIcon">
+        <div class="basketIcon" @click="switchView">
             <i class="fas fa-shopping-basket"></i>
             <div class="counter">
                 <span>{{cartLength}}</span>
-
             </div>
            
         </div>
@@ -30,7 +26,13 @@ export default {
         "siteName",
         "cartLength",
         "logoImage"
-    ]  
+    ],
+    methods: {
+        switchView() {
+            console.log("event triggered");
+            this.$emit("switch-view");
+        }
+    }
 }
 </script>
 
