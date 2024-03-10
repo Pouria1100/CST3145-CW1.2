@@ -7,7 +7,7 @@
           <p>Location: {{lesson.location}}</p>
           <p>Price: £{{lesson.price}}</p>
           <p>Available Spaces: {{lesson.spaces}}</p>
-          <button>
+          <button @click="addLessonToCart(lesson)">
               <i v-if="lesson.spaces != 0" class="fa-solid fa-cart-plus cartIcon"></i>
               <i v-else class="fa-solid fa-cart-shopping cartIcon"></i>
           </button>
@@ -19,7 +19,12 @@
 <script>
 export default {
   name: "LessonView",
-  props: [ "lessons"]
+    props: ["lessons"],
+    methods: {
+        addLessonToCart(lesson){
+            this.$emit("add-lesson-to-cart", lesson);
+        }
+    }
    
 
 }

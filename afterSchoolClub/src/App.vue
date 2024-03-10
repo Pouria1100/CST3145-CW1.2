@@ -11,7 +11,10 @@
 
   <component 
     :is = "currentView" 
-    :lessons = "lessons" 
+    :lessons = "lessons"
+    @add-lesson-to-cart = "addLessonToCart"
+    @remove-lesson-from-cart = "removeLessonFromCart"
+    :cart = "cart" 
    ></component>
 
    
@@ -40,6 +43,22 @@ export default {
     CheckoutView
   },
   methods: {
+    addLessonToCart(lesson) {
+      lesson.spaces -= 1;
+      this.cart.push(lesson);
+    },
+    removeLessonFromCart(lesson) {
+      const cartLength = this.cart.length;
+      for (let i = 0; i < cartLength; i++) {
+        let currentLesson = this.cart[i];
+     
+        if (JSON.stringify(currentLesson) === JSON.stringify(lesson)) {
+              lesson.spaces += 1;
+              this.cart.splice(i, 1); 
+              break;
+        }
+      } 
+    },
     switchView() {
       if (this.currentView === LessonView) {
         this.currentView = CheckoutView
